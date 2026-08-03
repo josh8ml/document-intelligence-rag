@@ -1,0 +1,23 @@
+# Runs automatically on git commit after pre-commit install.
+# Run manually across the repo with: pre-commit run --all-files
+repos:
+  # Ruff: pinned to an exact version so local and CI format identically.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.1
+    hooks:
+      # Linter (auto-fixes what it safely can).
+      - id: ruff-check
+        args: [--fix]
+      # Formatter.
+      - id: ruff-format
+
+  # mypy: run from the local virtual environment so it can import `app`
+  # and its dependencies. Requires the venv to be active when you commit.
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy (local venv)
+        entry: mypy
+        language: system
+        types: [python]
+        pass_filenames: false
