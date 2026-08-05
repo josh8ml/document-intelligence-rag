@@ -24,6 +24,7 @@ dependencies = [
     "pydantic-settings>=2.3",
     "python-dotenv>=1.0",
     "python-multipart>=0.0.9",
+    "pymupdf>=1.24",
 ]
 
 [project.optional-dependencies]
@@ -100,3 +101,7 @@ show_error_codes = true
 module = "tests.*"
 disallow_untyped_defs = false
 disallow_incomplete_defs = false
+
+[[tool.mypy.overrides]]
+module = ["pymupdf"]
+ignore_missing_imports = true
