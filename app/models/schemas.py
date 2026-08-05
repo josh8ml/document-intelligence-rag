@@ -24,3 +24,13 @@ class VersionResponse(BaseModel):
 
     version: str = Field(description="Semantic version of the application.")
     app_name: str = Field(description="Configured application name.")
+
+
+class UploadResponse(BaseModel):
+    """Metadata returned after a successful document upload."""
+
+    document_id: str = Field(description="Unique identifier for the document.")
+    filename: str = Field(description="Sanitized original filename.")
+    stored_filename: str = Field(description="Internal filename used on disk.")
+    content_type: str = Field(description="Reported MIME type of the upload.")
+    size_bytes: int = Field(description="Size of the stored file in bytes.")

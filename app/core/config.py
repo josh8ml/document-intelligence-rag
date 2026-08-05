@@ -25,12 +25,21 @@ class Settings(BaseSettings):
     api_host: str = "0.0.0.0"
     api_port: int = 8000
 
+    # Document ingestion
+    max_upload_size_mb: int = 25
+    upload_dir: str = "data/raw"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
     )
+
+    @property
+    def max_upload_size_bytes(self) -> int:
+        """Maximum allowed upload size, in bytes."""
+        return self.max_upload_size_mb * 1024 * 1024
 
 
 @lru_cache
